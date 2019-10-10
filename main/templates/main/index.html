@@ -1,12 +1,17 @@
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
+{% extends 'main/header.html' %}
 
-    <li><a href="{% url 'main:detail' question.id %}">{{ question.question_text }}</a></li>
-        
-    <!-- <li><a href="/main/ question.id /">question.question_text</a></li> -->
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+{% block content %}
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+
+        <li><a href="{% url 'main:detail' question.id %}"><h4  style="color: black;">{{ forloop.counter }}.&nbsp;{{ question.question_text }}</h4></a></li>
+            
+        <!-- <li><a href="/main/ question.id /">question.question_text</a></li> -->
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+
+{% endblock %}

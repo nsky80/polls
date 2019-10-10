@@ -1,14 +1,28 @@
-<h1>Detail.html</h1>
-<h1>{{ question.question_text }}</h1>
+{% extends 'main/header.html' %}
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% block content %}
+    <strong>Detail.html</strong>
+    <br>
+    <h4>{{ question.question_text }}</h4>
 
-<form action="{% url 'main:vote' question.id %}" method="post">
-{% csrf_token %}
-{% for choice in question.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
-   <br>
-{% endfor %}
-<input type="submit" value="Vote">
-</form>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'main:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+
+
+            <label for="choice{{ forloop.counter }}">
+            <input class="with-gap" name="choice" type="radio" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+            <span><strong style="color: #4a148c">{{ choice.choice_text }}</strong></span>
+            </label>
+
+            <br>
+
+    {% endfor %}
+    <br>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Vote
+    </button>
+         
+    </form>
+{% endblock %}
